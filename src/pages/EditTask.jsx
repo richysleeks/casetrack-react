@@ -57,7 +57,7 @@ export default function EditTask() {
         due_date: form.due_date || null,
       }
       await taskService.update(id, payload)
-      navigate(`/tasks/${id}`)                  // redirect back to detail page on success
+      navigate(`/tasks/${id}`, { replace: true }) // replace history so Back skips the edit page
     } catch (err) {
       if (err.errors) {
         setErrors(err.errors)                   // map API field errors to the form

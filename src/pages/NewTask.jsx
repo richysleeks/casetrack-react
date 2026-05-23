@@ -33,7 +33,7 @@ export default function NewTask() {
         due_date: form.due_date || undefined,
       }
       const created = await taskService.create(payload)
-      navigate(`/tasks/${created.id}`)               // redirect to the new task's detail page
+      navigate(`/tasks/${created.id}`, { replace: true }) // replace history so Back skips the form
     } catch (err) {
       if (err.errors) {
         setErrors(err.errors)                        // map API field errors to the form
