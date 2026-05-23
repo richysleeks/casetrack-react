@@ -9,7 +9,7 @@ const statusLinks = [
   { label: 'Overdue', status: 'overdue', color: 'var(--overdue)' },
 ]
 
-export default function Sidebar() {
+export default function Sidebar({ isOpen, onClose }) {
   const location = useLocation()
 
   // NavLink doesn't handle query strings for active state, so we check manually
@@ -23,7 +23,7 @@ export default function Sidebar() {
   }
 
   return (
-    <aside className="sidebar">
+    <aside className={`sidebar${isOpen ? ' sidebar--open' : ''}`}>
 
       {/* Logo */}
       <div className="sidebar-logo">
@@ -33,10 +33,11 @@ export default function Sidebar() {
 
       <nav className="sidebar-nav">
 
-        {/* Main nav links */}
+        {/* Main nav links — onClose collapses sidebar on mobile after navigation */}
         <NavLink
           to="/dashboard"
           className={({ isActive }) => 'nav-item' + (isActive ? ' active' : '')}
+          onClick={onClose}
         >
           <LayoutDashboard size={16} />
           Dashboard
@@ -45,6 +46,7 @@ export default function Sidebar() {
         <NavLink
           to="/tasks"
           className={'nav-item' + (isAllTasksActive() ? ' active' : '')}
+          onClick={onClose}
         >
           <ListChecks size={16} />
           All Tasks
@@ -58,6 +60,7 @@ export default function Sidebar() {
             key={status}
             to={`/tasks?status=${status}`}
             className={'nav-item' + (isStatusActive(status) ? ' active' : '')}
+            onClick={onClose}
           >
             <span className="status-dot" style={{ background: color }} />
             {label}

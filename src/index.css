@@ -725,3 +725,185 @@ body {
 }
 
 .page-state.error { color: var(--danger); }
+
+/* ─── Hamburger (hidden on desktop) ─── */
+
+.hamburger {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  color: var(--text);
+  cursor: pointer;
+  padding: 4px;
+  flex-shrink: 0;
+}
+
+/* ─── Sidebar backdrop (mobile only) ─── */
+
+.sidebar-backdrop {
+  display: none;
+}
+
+/* ─── Tablet — 1024px ─── */
+
+@media (max-width: 1024px) {
+  .stats-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .page-content {
+    padding: 20px 24px;
+  }
+}
+
+/* ─── Mobile — 768px ─── */
+
+@media (max-width: 768px) {
+
+  /* Sidebar slides in from the left as a fixed overlay */
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    z-index: 200;
+    transform: translateX(-100%);
+    transition: transform 0.25s ease;
+    box-shadow: 4px 0 16px rgba(0,0,0,0.1);
+  }
+
+  .sidebar--open {
+    transform: translateX(0);
+  }
+
+  .sidebar-backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 199;
+  }
+
+  /* Hamburger visible on mobile */
+  .hamburger {
+    display: flex;
+  }
+
+  /* Header adjustments */
+  .main-header {
+    padding: 10px 16px;
+    gap: 10px;
+  }
+
+  .header-search {
+    max-width: none;
+    flex: 1;
+  }
+
+  /* Hide user text, keep avatar */
+  .user-info {
+    display: none;
+  }
+
+  /* Page content */
+  .page-content {
+    padding: 16px;
+  }
+
+  /* Page header stacks on mobile */
+  .page-header {
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-start;
+  }
+
+  /* Stats grid — 2 columns on mobile */
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  /* Filter bar wraps on mobile */
+  .filter-bar {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .filter-search {
+    max-width: none;
+    flex: 1 1 100%;
+  }
+
+  .filter-bar select {
+    flex: 1;
+  }
+
+  /* Table scrolls horizontally on mobile */
+  .table-card {
+    overflow-x: auto;
+  }
+
+  .task-table {
+    min-width: 560px;
+  }
+
+  /* Form takes full width */
+  .form-card {
+    max-width: 100%;
+    padding: 20px 16px;
+  }
+
+  /* Form row stacks to single column */
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  /* Detail fields — 2 columns */
+  .detail-fields {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .detail-card {
+    padding: 20px 16px;
+  }
+
+  /* Detail header stacks on small screens */
+  .detail-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* ─── Small mobile — 480px ─── */
+
+@media (max-width: 480px) {
+
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .stat-card {
+    padding: 12px;
+    gap: 10px;
+  }
+
+  .stat-value {
+    font-size: 22px;
+  }
+
+  /* Detail fields — single column */
+  .detail-fields {
+    grid-template-columns: 1fr;
+  }
+
+  .modal {
+    padding: 20px 16px;
+  }
+
+  .page-header h1 {
+    font-size: 19px;
+  }
+}
